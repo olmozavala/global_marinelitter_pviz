@@ -245,6 +245,7 @@ class  ParticlesLayer extends React.Component {
                 // console.log("Done reading and uncompressing all the files!!!!")
                 cur_state = STATUS.playing
                 $(".btn").attr("disabled", false)  // Enable all the buttons
+                this.props.chardin.stop()
             }else{
                 let perc = parseInt(100 * (this.state.loaded_files / files_to_load))
                 $(".loading_perc").text(`${perc} %`)
