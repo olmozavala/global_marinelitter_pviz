@@ -1,0 +1,58 @@
+{
+  "homepage": "https://marinelitter.coaps.fsu.edu/",
+  "other": "https://ozavala.coaps.fsu.edu/marine_litter_dev/",
+  "name": "ocean_litter",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.18",
+    "@jeffbski/parquetjs": "^0.10.2",
+    "animate.css": "^3.7.2",
+    "bootstrap": "^4.6.1",
+    "canvasjs": "^1.8.3",
+    "intro.js": "^2.9.3",
+    "jquery": "^3.6.0",
+    "jszip": "^3.10.0",
+    "lodash": "^4.17.21",
+    "npm": "^6.14.17",
+    "open-iconic": "^1.1.1",
+    "parcel-bundler": "^1.12.5",
+    "react": "^16.14.0",
+    "react-bootstrap": "^1.6.5",
+    "react-bootstrap-icons": "^1.8.2",
+    "react-device-detect": "^1.17.0",
+    "react-dom": "^16.14.0",
+    "react-open-iconic-svg": "^3.0.1",
+    "react-range": "^1.8.12",
+    "react-scripts": "^3.4.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build & npm run copy",
+    "copy": "cp -r node_modules/lib build/lib",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "d3": "^5.16.0",
+    "ol": "^5.3.3",
+    "underscore": "^1.13.4"
+  }
+}

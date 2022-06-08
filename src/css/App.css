@@ -1,0 +1,148 @@
+.my_round {
+  border-bottom: 1px solid #ebebeb;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.wl_statsplot{
+  position: absolute;
+  bottom: 0%;
+  height: 280px;
+  z-index: 102;
+  width: 100%;
+  opacity: 1;
+  display: none;
+}
+
+.wl-palette{
+  position: absolute;
+  bottom: 1%;
+  z-index: 101;
+  pointer-events: none;
+  display: none;
+  text-align: center;
+}
+
+.wl-palette-canvas{
+  border-radius: 5px 5px;
+  background-color: black;
+}
+
+.palette_img{
+  height: 80%;
+  margin-bottom: 10px;
+}
+
+@media(max-width: 767px){
+  h5 {
+    font-size: 1.0rem;
+  }
+  h6 {
+    font-size: 0.8rem;
+  }
+  .wl_statsplot{
+    height: 547px;
+  }
+}
+
+
+.wl-title{
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+}
+
+
+@media(max-width: 768px){
+  #main-title{
+    display: none;
+  }
+  #intro_text {
+    top: 0px;
+    left: 0px;
+  }
+  .wl-palette{
+      left: 5%;
+  }
+}
+
+@media(min-width: 768px){
+  #intro_text {
+    top: 100px;
+
+  }
+  .wl-palette{
+    left: 20%;
+  }
+}
+
+@media(min-width: 1200px){
+  .wl-title{
+    top: 55px;
+    width: 100%;
+  }
+  #main-title{
+    display: block;
+  }
+  #intro_text {
+    top: 130px;
+  }
+}
+
+.control {
+  /*position: absolute;*/
+  background-color: white;
+  top: 0;
+  z-index: 103;
+  width: 100%;
+  height: 50px;
+  opacity: .95;
+}
+
+#intro_text{
+  z-index: 103;
+  position: absolute;
+  /*display: none;*/
+}
+
+.viz-control{
+  max-width: 100px;
+}
+
+@media(max-width: 768px){
+  .range-ml{
+    max-width: 100px;
+  }
+}
+
+
+@media(max-width: 1300px) and (min-width: 992px){
+    .logos{
+       min-width: 160px;
+    }
+    /*.anim-controls{*/
+    /*    margin-left: 100px;*/
+    /*}*/
+  .range-ml{
+      /*position: absolute;*/
+      /*bottom: 50%;*/
+      /*left: 40%;*/
+        max-width: 50px;
+  }
+}
+
+/*@media(max-width: 1400px) and (min-width: 769px){*/
+/*  .range-ml{*/
+/*    max-width: 50px;*/
+/*  }*/
+/*}*/
+
+
+@media(min-width: 1400px){
+  .range-ml{
+    max-width: 200px;
+  }
+  .viz-control{
+    max-width: 100%;
+  }
+}
