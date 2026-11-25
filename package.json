@@ -29,9 +29,9 @@
     "react-scripts": "^3.4.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build & npm run copy",
-    "copy": "cp -r node_modules/lib build/lib",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
+    "build:dev": "PUBLIC_URL=https://ozavala.coaps.fsu.edu/marine_litter_dev/ NODE_OPTIONS=--openssl-legacy-provider react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

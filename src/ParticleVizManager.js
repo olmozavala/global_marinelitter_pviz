@@ -15,9 +15,12 @@ import {Bullseye, Download, QuestionCircle, House, List} from "react-bootstrap-i
 import {Collapse, Row, Col, Container, Button}  from "react-bootstrap";
 import { isMobile } from "react-device-detect";
 import './css/App.css'
+import {WMS_URL, WMS_HISTOGRAM_LAYER, PARTICLES_FOLDER_DESKTOP, PARTICLES_FOLDER_MOBILE,
+    DEFAULT_STEPS_PER_FILE} from "./constants"
+// Written by 4b_Export_Web_Binary_Extended.py (ocean_litter repository) together with the particle files
+import releases from "./releases.json"
 
-// const wms_url = "http://localhost:8080/ncWMS2/wms"
-const wms_url = "http://ozavala.coaps.fsu.edu/ncWMS2/wms"
+const wms_url = WMS_URL
 const def_alpha = "FF"
 
 let tempcolors = [
@@ -126,32 +129,33 @@ const def_style = "x-Sst"
 // const def_style = "default-inv"
 // const def_style = "div-RdYlGn-inv"
 
-let num_files = [10, 9, 9, 9, 9, 9, 9, 9, 8, 8, 8, 8]
-let data_files = []
-let folder = "4"  // Indicates the subsampling of the particles
-if(isMobile){
-    folder = "6"
+// The releases (file names, dates, number of files and days per time step) come from
+// releases.json, which is the manifest written by the exporter of the particle files.
+let folder = isMobile ? PARTICLES_FOLDER_MOBILE : PARTICLES_FOLDER_DESKTOP  // Subsampling of the particles
+// For testing, ?particles=N in the address selects another subsampling folder (for example ?particles=4)
+let requested_folder = new URLSearchParams(window.location.search).get("particles")
+if(requested_folder !== null && /^[0-9]{1,2}$/.test(requested_folder)){
+    folder = requested_folder
 }
-for(let i=1; i<=12; i++) {
-    let i_str = `${i < 10 ? '0' + i : i}`
-    data_files.push({
-        id: i,
-        file: `${folder}/YesWinds_YesDiffusion_NoUnbeaching_2010_${i_str}`,
-        // wms: `histo_${i_str}/histo`,
-        wms: `merged_five_years/histo`,
-        title: `${months[i-1]} 2010`,
+let data_files = releases.releases.map((release) => {
+    // "YYYY-MM-DD" as a local date, so the title never shifts by one day
+    let [year, month, day] = release.start_date.split("-").map((x) => parseInt(x))
+    return {
+        id: release.id,
+        file: `${folder}/${release.file}`,
+        wms: WMS_HISTOGRAM_LAYER,
+        title: `${months[month - 1]} ${year}`,
         speed: "",
-        style:def_style,
-        start_date: new Date(2010, i-1, 1),
-        num_files: num_files[i - 1],
-        // In each run we have more particles, so we need to change the maximum value on the palette
-        // max_pal: parseInt(def_max_pal_value - (def_max_pal_value*i)/(12*5)) ,
-        // max_pal: (32300 * 31 * ((12 * 5) - i)),  // Particles by number of days in average / X X is subjective
-        // min_pal: min_pal[i]
-        max_pal: 1600,  // Particles by number of days in average / X X is subjective
+        style: def_style,
+        start_date: new Date(year, month - 1, day),
+        end_date: release.end_date,
+        days_per_step: release.days_per_step || 1,
+        steps_per_file: release.steps_per_file || DEFAULT_STEPS_PER_FILE,
+        num_files: release.num_files,
+        max_pal: 1600,  // Maximum of the histogram palette
         min_pal: 0.1
-    })
-}
+    }
+})
 
 class  ParticleVizManager extends React.Component{
     /**

@@ -1,0 +1,129 @@
+{
+ "run": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching",
+ "subsample": [
+  4,
+  6
+ ],
+ "releases": [
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_01",
+   "start_date": "2010-01-01",
+   "end_date": "2026-01-01",
+   "days_per_step": 3,
+   "time_steps": 1949,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 1
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_02",
+   "start_date": "2010-02-01",
+   "end_date": "2025-12-30",
+   "days_per_step": 3,
+   "time_steps": 1938,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 2
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_03",
+   "start_date": "2010-03-01",
+   "end_date": "2025-12-31",
+   "days_per_step": 3,
+   "time_steps": 1929,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 3
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_04",
+   "start_date": "2010-04-01",
+   "end_date": "2026-01-01",
+   "days_per_step": 3,
+   "time_steps": 1919,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 4
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_05",
+   "start_date": "2010-05-01",
+   "end_date": "2026-01-01",
+   "days_per_step": 3,
+   "time_steps": 1909,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 5
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_06",
+   "start_date": "2010-06-01",
+   "end_date": "2025-12-30",
+   "days_per_step": 3,
+   "time_steps": 1898,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 6
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_07",
+   "start_date": "2010-07-01",
+   "end_date": "2025-12-30",
+   "days_per_step": 3,
+   "time_steps": 1888,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 7
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_08",
+   "start_date": "2010-08-01",
+   "end_date": "2025-12-31",
+   "days_per_step": 3,
+   "time_steps": 1878,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 8
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_09",
+   "start_date": "2010-09-01",
+   "end_date": "2026-01-01",
+   "days_per_step": 3,
+   "time_steps": 1868,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 9
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_10",
+   "start_date": "2010-10-01",
+   "end_date": "2026-01-01",
+   "days_per_step": 3,
+   "time_steps": 1858,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 10
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_11",
+   "start_date": "2010-11-01",
+   "end_date": "2025-12-30",
+   "days_per_step": 3,
+   "time_steps": 1847,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 11
+  },
+  {
+   "file": "UpToDec2025_YesWinds_YesDiffusion_NoUnbeaching_2010_12",
+   "start_date": "2010-12-01",
+   "end_date": "2025-12-30",
+   "days_per_step": 3,
+   "time_steps": 1837,
+   "steps_per_file": 200,
+   "num_files": 10,
+   "id": 12
+  }
+ ]
+}

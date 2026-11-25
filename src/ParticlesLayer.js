@@ -19,8 +19,11 @@ import {
 
 import JSZip from "jszip"
 
+import {DEFAULT_STEPS_PER_FILE} from "./constants"
+
 const default_size = 15 // Font size
-const particles_per_file = 200 // These MUST match with the number of particles per file
+// Time steps in each particle file. It MUST match --steps-per-file of the exporter
+const particles_per_file = DEFAULT_STEPS_PER_FILE
 const STATUS = {
     loading: 0,
     decompressing: 1,
@@ -179,15 +182,20 @@ class  ParticlesLayer extends React.Component {
                     data[name] = {}
                     data[name]["oceans"] = "NoOcean"
                     data[name]["continent"] = continent
+                    // int16 hundredths of a degree -> float32 degrees. Each particle is a view
+                    // into one typed array, which uses far less memory and time than
+                    // building a JavaScript array per particle.
                     let all_lat_country = new Float32Array(new Int16Array(binarydata, buf_off, num_part*tot_timesteps))
                     let all_lon_country = new Float32Array(new Int16Array(binarydata, buf_off+(num_part*tot_timesteps*2), num_part*tot_timesteps))
+                    for(let i=0; i < all_lat_country.length; i++){
+                        all_lat_country[i] /= 100
+                        all_lon_country[i] /= 100
+                    }
                     let lats_by_part = []
                     let lons_by_part = []
                     for(let cur_part=0; cur_part < num_part; cur_part++){
-                        let cur_part_lats = _.range(tot_timesteps).map((i) =>  all_lat_country[cur_part*tot_timesteps + i]/100)
-                        let cur_part_lons = _.range(tot_timesteps).map((i) =>  all_lon_country[cur_part*tot_timesteps + i]/100)
-                        lats_by_part.push(cur_part_lats)
-                        lons_by_part.push(cur_part_lons)
+                        lats_by_part.push(all_lat_country.subarray(cur_part*tot_timesteps, (cur_part+1)*tot_timesteps))
+                        lons_by_part.push(all_lon_country.subarray(cur_part*tot_timesteps, (cur_part+1)*tot_timesteps))
                     }
                     data[name]["lat_lon"] = [lats_by_part, lons_by_part]
                     buf_off += num_part*tot_timesteps*4
@@ -429,7 +437,9 @@ class  ParticlesLayer extends React.Component {
     drawNextDay() {
         let ctime = Date.now()
         // Verify is time to draw the next frame
-        if( (ctime - this.time) > (1000/this.state.speed_hz)) {
+        // Until the map has given us its extent there is nothing to draw on. Skip the frame but
+        // keep the loop alive; drawing without it threw an error that stopped the animation for good.
+        if( (this.state.extent !== null) && ((ctime - this.time) > (1000/this.state.speed_hz))) {
             // console.log(`${(ctime - this.time)}  ${(1000/this.state.speed_hz)}`)
             this.time = ctime
             let canvas = this.d3canvas.node()
@@ -715,7 +725,6 @@ class  ParticlesLayer extends React.Component {
         // e.preventDefault()
         let cur_time_step = parseInt(e.target.value)
         this.time_step = cur_time_step
-        console.log(this.time_step)
         let canvas = this.d3canvas.node()
         this.ctx.clearRect(0, 0, canvas.width, canvas.height)
         this.drawNextDay()
@@ -820,7 +829,9 @@ class  ParticlesLayer extends React.Component {
     displayCurrentDay() {
         let start_date = this.state.selected_model.start_date
         let title = d3.select("#dates-title")
-        let cur_date = new Date(start_date.getTime() + this.time_step * 24 * 3600000)
+        // Each time step can be more than one day (days_per_step of the release)
+        let days = this.time_step * (this.state.selected_model.days_per_step || 1)
+        let cur_date = new Date(start_date.getFullYear(), start_date.getMonth(), start_date.getDate() + days)
         title.text(this.dateFormat(cur_date))
     }
 

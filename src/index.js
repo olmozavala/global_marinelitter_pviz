@@ -16,13 +16,13 @@ import OSM from "ol/source/OSM";
 import {House} from "react-bootstrap-icons";
 import {Spinner} from "react-bootstrap";
 import {chardinJs} from "./chardinjsoz";
+import {DATA_SERVER} from "./constants";
 
 // /FORMAT=image/png&HEIGHT=256&WIDTH=256&BBOX=-180.000005437,-89.900001526,180.0,83.627418516
 let background_layer = new TileLayer({ source: new OSM() });
 
 // This address indicates from where are we loading the binary files of the particles.
-// let ip_address = "http://localhost/"
-let ip_address = 'https://ozavala.coaps.fsu.edu/'
+let ip_address = DATA_SERVER
 const tot_res = 9;
 let resolutions = Array(tot_res);
 for(let i=0; i < tot_res; i++){
